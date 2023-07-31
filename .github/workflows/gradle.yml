@@ -28,7 +28,11 @@ jobs:
       with:
         java-version: '11'
         distribution: 'temurin'
+    - name: Download and setup Gradle
+      run: |
+        wget https://services.gradle.org/distributions/gradle-7.2-all.zip
+        unzip -q gradle-7.2-all.zip
+        export PATH=$PATH:$PWD/gradle-7.2/bin
     - name: Build with Gradle
-      uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
-      with:
-        arguments: build
+      run: |
+        gradle build
